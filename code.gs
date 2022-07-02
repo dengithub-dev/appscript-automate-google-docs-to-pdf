@@ -1,5 +1,6 @@
 //BASED FROM https://gist.github.com/automagictv/48bc3dd1bc785601422e80b2de98359e
 //A simple tweak was added which is the conversion of the google docs to pdf, saved in gdrive
+//You can also send the pdf as attachment to mail
 
 //Make sure you provide the google docs id and destination files
 const TEMPLATE_FILE_ID = '';
@@ -82,6 +83,16 @@ function createDocFromForm() {
   
   //save as pdf
    var pdfContent = document.getAs('application/pdf');
-   var pdfFile = target_pdf_folder.createFile(pdfContent.copyBlob())
+   var pdfFile = target_pdf_folder.createFile(pdfContent.copyBlob());
    
+  /* Remove the comment if you want to send the pdf to your mail
+  //Send Email PDF Attachment
+  MailApp.sendEmail({
+      to: `${response_data["Your Email"]}`,
+      name: "Google Docs PDF",
+      subject: "Letter PDF attachment",
+      htmlBody: `${response_data["Content"]}`,
+      attachments: pdfFile.getAs(MimeType.PDF)
+    });
+   */
 }
